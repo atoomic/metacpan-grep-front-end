@@ -215,7 +215,8 @@ sub do_search {
 
     $search = _sanitize_search($search);
 
-    $page //= 0;
+    $page   //= 0;
+    $search //= '';
     $page = 0 if $page < 0;
     my $cache = $self->get_match_cache( $search, $search_distro,
         $filetype, $caseinsensitive );
@@ -449,6 +450,7 @@ sub get_match_cache {
     my ( $self, $search, $search_distro, $query_filetype, $caseinsensitive )
         = @_;
 
+    $search          //= '';
     $caseinsensitive //= 0;
 
     my $gitdir = $self->git()->work_tree;
